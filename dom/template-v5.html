@@ -1,0 +1,31 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+  <h1 v-once>{{ titulo }}</h1>
+  <!--A diretiva v-once serve para que ele não atualize o seu estado-->
+  <p>{{ saudacao() }}</p>
+  <a v-bind:href="link">Google</a>
+  <!--v-bind serve para fazer a ligação entre algo que esteja na vue instace e o atributo da tag-->
+</div>
+
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      titulo: "Bem vindo ao VueJS",
+      link: "https://www.google.com/",
+    },
+
+    methods: {
+      saudacao: function () {
+        this.titulo = "Bem Vindo";
+        return this.titulo; // podemos acessar outros objetos com o this.
+      },
+    },
+    //PODEMOS UTILIZAR DESSA FORMA DENTRO DE UM METODO;
+    //  meuNome(){
+    //    return 'Meu nome é thiago'
+    //}
+    //obs: o double mustache só me entrega valor do tipo texto
+  });
+</script>
