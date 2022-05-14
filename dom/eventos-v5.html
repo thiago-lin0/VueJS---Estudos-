@@ -1,0 +1,54 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="eventos">
+  <h1>{{ contador }}</h1>
+  <!--Para passar um evento precisamos utilizar dessa forma com o $event-->
+  <button v-on:click="somar(5, $event)">Soma 1</button>
+  <!--v-on é para escutar o nosso evento que queremos faze e logo em seguia o nome do evento que você vai fazer-->
+  <p v-on:mouseMove="atualizarXY">
+    Mouse: {{ x }} e {{ y }}
+    <!--<span v-on:mouseMove="parar">PARAR AQUI !!</span>-->
+    <span v-on:mouseMove.stop="">PARAR AQUI !!</span>
+    <!--Modificadores de eventos podem ser passado direto //stop-->
+  </p>
+
+  <!--<a v-on:click="naoNavegar" href="https://google.com">Google</a>-->
+  <a v-on:click.prevent="" href="https://google.com">Google</a>
+  <!--Outro modificador para que não seja redirecionado-->
+  <br />
+  <input type="text" v-on:keyup.enter="exibirAlerta" />
+  <!--Modifificador para quando o enter for pressionado ele rodar meu metodo-->
+</div>
+
+<script>
+  new Vue({
+    el: "#eventos",
+
+    data: {
+      contador: 0,
+      x: 0,
+      y: 0,
+    },
+
+    methods: {
+      //para passar o evento precisamos colocar la no nosso html
+      somar(valor, event) {
+        console.log(valor, event);
+        return (this.contador += valor);
+      },
+      atualizarXY(event) {
+        this.x = event.clientX;
+        this.y = event.clientY;
+      },
+      // parar(e) {
+      //   e.stopPropagation();
+      // },
+      // naoNavegar(event) {
+      //   event.preventDefault();
+      // },
+      exibirAlerta() {
+        alert("Alerta exibido");
+      },
+    },
+  });
+</script>
